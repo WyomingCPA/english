@@ -146,7 +146,7 @@ class TelegramController extends Controller
         $time_from = strtotime('-2 day', time());
         $delta_from = date('Y-m-d H:i:s', $time_from);
 
-        $modelLink = Link::find()->orderBy(['rand()'=> SORT_DESC])->one();;
+        $modelLink = Link::find()->orderBy(['rand()'=> SORT_DESC])->one();
         $json_words = $modelLink->id_word;
         $data_array = json_decode($json_words, true);
 
@@ -161,7 +161,7 @@ class TelegramController extends Controller
             $word = str_replace("'", "\'", $model['word']);   
             $word_item = "{$word} - {$model['translation']}" . ";\n";
             $id_array[] = $model['id'];
-            $messageText = $messageText . $word_item ;
+            $messageText = $messageText . $word_item;
 
             $model = Word::findOne((int)$model['id']);//make a typecasting
             if ($model != null)
@@ -172,9 +172,9 @@ class TelegramController extends Controller
             }
         }
 
-        $chatId = '783781261';
+        $chatId = '-471687689';
 
-        $bot = new BotApi('970747361:AAHo0ZxfAlAPwoBgE71lEX6YPq-j-6CyAfk');
+        $bot = new BotApi('1555682911:AAEAbiv_R4cZat6zHuHHxnbilMHJlta07VE');
             // Set webhook
 
         //$bot->setProxy('root:6zd4{k879B8$@195.161.41.150:3128');
