@@ -88,11 +88,11 @@ class CategoryController extends Controller
 
     /**
      * Выводит слова, которые не повторялись уже 
-     * больше 20 дней
+     * больше 90 дней
      */
     public function actionRusty()
     {
-        $time = strtotime('-50 day', time());
+        $time = strtotime('-90 day', time());
         $delta = date('Y-m-d H:i:s', $time);
     
         $query = Word::find()->where(['<=', 'last_update', $delta]);

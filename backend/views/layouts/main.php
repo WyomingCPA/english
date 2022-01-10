@@ -68,7 +68,7 @@ AppAsset::register($this);
     <br><br><br><br><br>
           <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="<?= Url::to(['/category/rusty'], true) ?>">>20 дней</a>
+                <a href="<?= Url::to(['/category/rusty'], true) ?>">>90 дней</a>
                 <span class="badge badge-primary badge-pill"><?= Yii::$app->params['count20day']; ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
