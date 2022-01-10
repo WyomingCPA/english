@@ -92,7 +92,7 @@ class CategoryController extends Controller
      */
     public function actionRusty()
     {
-        $time = strtotime('-20 day', time());
+        $time = strtotime('-50 day', time());
         $delta = date('Y-m-d H:i:s', $time);
     
         $query = Word::find()->where(['<=', 'last_update', $delta]);
