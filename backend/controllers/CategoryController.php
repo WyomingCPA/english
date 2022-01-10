@@ -113,7 +113,7 @@ class CategoryController extends Controller
             'dataProvider' => $provider,           
         ]);
     }
-
+    //Выборка слов >1 дней < 4
     public function actionShortperiod()
     {
         $time_from = strtotime('-1 day', time());
@@ -139,7 +139,27 @@ class CategoryController extends Controller
             'dataProvider' => $provider,           
         ]);        
     }
+    //Выборка за today
+    public function actionTodayPeriod()
+    {
+        $query = Word::find()->where('last_update >= CURDATE()');
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 50,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'last_update' => SORT_ASC,
+                ]
+            ],
+        ]);
 
+        return $this->render('shortperiod', [
+            'dataProvider' => $provider,           
+        ]);  
+    }
+    
     /**
      * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.

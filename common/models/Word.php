@@ -88,7 +88,9 @@ class Word extends \yii\db\ActiveRecord
                                                 ->where(['is', 'last_update', new \yii\db\Expression('null')])
                                                 ->orWhere(['<=', 'last_update', $delta_from_speed])->count();
 
-        Yii::$app->params['telegram'] = Word::find()->where(['=', 'send_telegram', true])->count();                                        
+        Yii::$app->params['telegram'] = Word::find()->where(['=', 'send_telegram', true])->count(); 
+        Yii::$app->params['today'] = Word::find()->where('last_update >= CURDATE()')->count();
+
      
         return true;
     }

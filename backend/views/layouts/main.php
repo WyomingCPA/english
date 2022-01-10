@@ -75,6 +75,10 @@ AppAsset::register($this);
                 <a href="<?= Url::to(['/category/shortperiod'], true) ?>">>1 дней < 4</a>
                 <span class="badge badge-primary badge-pill"><?= Yii::$app->params['onedayfor']; ?></span>
             </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="<?= Url::to(['/category/today-period'], true) ?>">Выборка за сегодня</a>
+                <span class="badge badge-primary badge-pill"><?= Yii::$app->params['today']; ?></span>
+            </li>
           </ul>
           <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
