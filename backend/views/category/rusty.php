@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
@@ -36,29 +37,43 @@ $this->registerJs(
 
 ?>
 <div class="category-view">
-    <h1><?= Html::encode($this->title) ?></h1>
+  <h1><?= Html::encode($this->title) ?></h1>
 </div>
 
-<?=Html::beginForm(['word/learnrusty'],'post');?>
+<?= Html::beginForm(['word/learnrusty'], 'post'); ?>
 
-<?=Html::dropDownList('action','',['learn'=>'Выучил',],['class'=>'dropdown',])?>
+<?= Html::dropDownList('action', '', ['learn' => 'Выучил',], ['class' => 'dropdown',]) ?>
 
-<?=GridView::widget([
-    'options' => ['class' => 'table-responsive'],
-    'tableOptions' => ['class' => 'table table-condensed'],
-    'dataProvider' => $dataProvider,
-    'rowOptions'=>function($model, $key, $index, $column){       
-    },
-    'columns' => [
-       [
-         'class' => 'yii\grid\CheckboxColumn',
-         'checkboxOptions' => function($model, $key, $index, $widget) {
-            return ['value' => $model['id'] ];
-          },
-        ],
-       'id', 'word', 'translation', 'last_update', 'count'],
-  ]); ?>
+<?= GridView::widget([
+  'options' => ['class' => 'table-responsive'],
+  'tableOptions' => ['class' => 'table table-condensed'],
+  'dataProvider' => $dataProvider,
+  'rowOptions' => function ($model, $key, $index, $column) {
+  },
+  'columns' => [
+    [
+      'class' => 'yii\grid\CheckboxColumn',
+      'checkboxOptions' => function ($model, $key, $index, $widget) {
+        return ['value' => $model['id']];
+      },
+    ],
+    'id', 'word', 'translation', 'last_update', 'count',
+    [
+      'class' => 'yii\grid\ActionColumn',
+      'template' => '{update} {delete}',
+      'buttons' => [
+        'update' => function ($url, $model, $key) {
+          return Html::a('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>', ['word/update', 'id' => $model->id]);
+        },
+        'delete' => function ($url, $model, $key) {
+          return Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['word/delete', 'id' => $model->id]);
+        },
+      ],
+    ],
+  ],
 
-<?=Html::submitButton('Выучил', ['class' => 'btn btn-info',]);?>
+]); ?>
 
-<?= Html::endForm();?> 
+<?= Html::submitButton('Выучил', ['class' => 'btn btn-info',]); ?>
+
+<?= Html::endForm(); ?>
