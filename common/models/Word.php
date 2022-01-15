@@ -67,8 +67,8 @@ class Word extends \yii\db\ActiveRecord
 
     public function countRequestPage()
     {
-        //>20
-        $time_rusty = strtotime('-20 day', time());
+        //>90
+        $time_rusty = strtotime('-90 day', time());
         $delta_rysty = date('Y-m-d H:i:s', $time_rusty);    
         Yii::$app->params['count20day'] = Word::find()->where(['<=', 'last_update', $delta_rysty])->count();
 
