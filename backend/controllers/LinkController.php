@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
+
 /**
  * LinkController implements the CRUD actions for Link model.
  */
@@ -44,6 +45,44 @@ class LinkController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+    /**
+     * ВЫводит все слова со всех ссылок.
+     * 
+     */
+    public function actionAll()
+    {
+        $models = Link::find()->all();
+
+        $list_array = [];
+        foreach ($models as $item)
+        {
+            $data_array = json_decode($item->id_word, true);
+            foreach ($data_array as $key => $value)
+            {
+                $list_array [] = $value;
+            }
+            
+
+        }
+
+        
+
+        $query = Word::find()->where(['in', 'id', $list_array]);
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 50,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'last_update' => SORT_ASC,
+                ]
+            ],
+        ]);
+        return $this->render('words', [
+            'dataProvider' => $provider,
         ]);
     }
 
@@ -131,23 +170,23 @@ class LinkController extends Controller
             ],
         ]);
         return $this->render('words', [
-            'dataProvider' => $provider,            
-        ]);   
+            'dataProvider' => $provider,
+        ]);
     }
 
     public function actionWordsLearn()
     {
-        $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
+        $action = Yii::$app->request->post('action');
+        $selection = (array)Yii::$app->request->post('selection'); //typecasting
 
-        foreach($selection as $id){
-            $model = Word::findOne((int)$id);//make a typecasting
-       
+        foreach ($selection as $id) {
+            $model = Word::findOne((int)$id); //make a typecasting
+
             $model->last_update = new Expression('NOW()');
-            $model->save(false); 
-       }
-       
-       return $this->redirect(['link/index', ]);  
+            $model->save(false);
+        }
+
+        return $this->redirect(['link/index',]);
     }
 
     /**

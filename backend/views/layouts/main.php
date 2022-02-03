@@ -97,6 +97,10 @@ AppAsset::register($this);
                 <a href="<?= Url::to(['/link/index'], true) ?>">Link</a>
                 <span class="badge badge-primary badge-pill">0</span>
             </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="<?= Url::to(['/link/all'], true) ?>">Слова со всех ссылок</a>
+                <span class="badge badge-primary badge-pill">0</span>
+            </li>
           </ul>
     </div>
     <div class="container">
