@@ -63,11 +63,7 @@ class LinkController extends Controller
             {
                 $list_array [] = $value;
             }
-            
-
         }
-
-        
 
         $query = Word::find()->where(['in', 'id', $list_array]);
         $provider = new ActiveDataProvider([
@@ -188,6 +184,20 @@ class LinkController extends Controller
 
         return $this->redirect(['link/index',]);
     }
+
+    public function actionLinkLearn()
+    {
+        $selection = (array)Yii::$app->request->post('selection');
+        foreach ($selection as $id) {
+            $model = Link::findOne((int)$id); //make a typecasting
+
+            $model->last_update = new Expression('NOW()');
+            $model->save(false);
+        }
+        return $this->redirect(['link/index',]);
+    }
+
+
 
     /**
      * Finds the Link model based on its primary key value.

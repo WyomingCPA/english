@@ -47,6 +47,14 @@ class LinkSearch extends Link
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'last_update' => SORT_ASC,
+                ]
+            ],
         ]);
 
         $this->load($params);

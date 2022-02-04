@@ -17,6 +17,7 @@ class m191028_185251_create_link_table extends Migration
             'title' => $this->string(),
             'link' => $this->string(100),
             'id_word' => $this->json(),
+            'last_update' => $this->dateTime(),
         ]);
     }
 
